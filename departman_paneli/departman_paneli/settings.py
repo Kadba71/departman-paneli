@@ -7,7 +7,11 @@ SECRET_KEY = 'django-insecure-...değiştir...'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'web-production-2e96.up.railway.app'  # Railway domaininizi buraya ekleyin
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
