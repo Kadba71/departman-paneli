@@ -12,6 +12,10 @@ ALLOWED_HOSTS = [
     "127.0.0.1"
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://web-production-7cbc.up.railway.app"
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,6 +89,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ...existing code...
-LOGIN_URL = '/accounts/login/'  # migration tetiklemek için değişiklik
-# ...existing code...
+LOGIN_URL = '/accounts/login/'
