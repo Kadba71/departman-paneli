@@ -1,14 +1,13 @@
 import os
-from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'django-insecure-...değiştir...'
 
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "web-production-7cbc.up.railway.app",  # Railway domainini ekle
+    "web-production-7cbc.up.railway.app",
     "localhost",
     "127.0.0.1"
 ]
@@ -20,8 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'departman_paneli.departmanlar',  # <-- Burayı böyle yapın
-
+    'departman_paneli.departmanlar',
 ]
 
 MIDDLEWARE = [
@@ -36,12 +34,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'departman_paneli.urls'
 
-LOGIN_REDIRECT_URL = '/'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -59,7 +55,7 @@ WSGI_APPLICATION = 'departman_paneli.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -78,24 +74,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'tr'
-
+LANGUAGE_CODE = 'tr-tr'
 TIME_ZONE = 'Europe/Istanbul'
-
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-# ...existing code...
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# ...existing code...
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Giriş ve yönlendirme ayarları
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL
