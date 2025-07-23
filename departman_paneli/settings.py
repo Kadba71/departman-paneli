@@ -10,7 +10,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'web-production-2e96.up.railway.app'  # Railway domaininizi buraya ekleyin
+    'web-production-7cbc.up.railway.app'
 ]
 
 INSTALLED_APPS = [
@@ -20,7 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'departmanlar',
+    'departman_paneli.departmanlar',  # <-- Burayı böyle yapın
+
 ]
 
 MIDDLEWARE = [
@@ -34,6 +35,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'departman_paneli.urls'
+
+LOGIN_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {
@@ -92,4 +95,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Giriş ve yönlendirme ayarları
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
