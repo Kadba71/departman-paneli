@@ -5,12 +5,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-...değiştir...'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'web-production-7cbc.up.railway.app'
+    "web-production-7cbc.up.railway.app",  # Railway domainini ekle
+    "localhost",
+    "127.0.0.1"
 ]
 
 INSTALLED_APPS = [
@@ -90,6 +90,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# ...existing code...
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# ...existing code...
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
