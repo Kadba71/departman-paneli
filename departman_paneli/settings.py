@@ -1,29 +1,22 @@
 import os
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-...değiştir...'
+SECRET_KEY = 'django-insecure-...'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    "web-production-7cbc.up.railway.app",
-    "localhost",
-    "127.0.0.1"
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-7cbc.up.railway.app"
-]
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'departmanlar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'departman_paneli.departmanlar',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +52,7 @@ WSGI_APPLICATION = 'departman_paneli.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -79,9 +72,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'tr-tr'
+
 TIME_ZONE = 'Europe/Istanbul'
+
 USE_I18N = True
+
 USE_L10N = True
+
 USE_TZ = True
 
 STATIC_URL = '/static/'
@@ -89,4 +86,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'

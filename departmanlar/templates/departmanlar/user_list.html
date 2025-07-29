@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kullanıcı Listesi</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f9fa;
+            margin: 40px;
+        }
+        h2 {
+            color: #343a40;
+        }
+        .container {
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        th, td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #dee2e6;
+            text-align: left;
+        }
+        th {
+            background: #343a40;
+            color: #fff;
+        }
+        tr:hover {
+            background: #f1f3f5;
+        }
+        .actions a {
+            margin-right: 8px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .actions a:hover {
+            text-decoration: underline;
+        }
+        .add-btn {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 8px 16px;
+            background: #28a745;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .add-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Kullanıcı Listesi</h2>
+    <a href="{% url 'user_create' %}" class="add-btn">+ Yeni Kullanıcı Ekle</a>
+    <table>
+        <tr>
+            <th>Kullanıcı Adı</th>
+            <th>Ad Soyad</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Durum</th>
+            <th>İşlemler</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.is_active|yesno:"Aktif,Pasif" }}</td>
+            <td class="actions">
+                <a href="{% url 'user_update' user.pk %}">Güncelle</a>
+                <a href="{% url 'user_delete' user.pk %}">Sil</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" style="text-align:center; color:#888;">Henüz kullanıcı yok.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

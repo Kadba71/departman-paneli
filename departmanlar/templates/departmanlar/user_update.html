@@ -1,0 +1,7 @@
+<h2>Kullanıcıyı Güncelle: {{ user.username }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Güncelle</button>
+</form>
+<p><a href="{% url 'user_list' %}">Kullanıcı Listesine Dön</a></p>

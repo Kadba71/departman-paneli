@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('departman_paneli.departmanlar.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),  # Bu satır mutlaka olmalı!
+    path('', include('departmanlar.urls')),
+    path('login/', auth_views.LoginView.as_view(template_name='departmanlar/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ]

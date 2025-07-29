@@ -1,0 +1,30 @@
+<h3 class="mb-3">Dış/İç Data Paneli</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Veri Ekle</button>
+</form>
+<table class="table table-bordered table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Departman</th>
+            <th>Yönetici</th>
+            <th>Tür</th>
+            <th>Başlık</th>
+            <th>Veri</th>
+            <th>Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.department }}</td>
+            <td>{{ record.manager_name }}</td>
+            <td>{{ record.data_type }}</td>
+            <td>{{ record.title }}</td>
+            <td>{{ record.value }}</td>
+            <td>{{ record.date|date:"d.m.Y" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

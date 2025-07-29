@@ -1,0 +1,7 @@
+<h2>Kullanıcıyı Sil: {{ user.username }}</h2>
+<p>Bu kullanıcıyı silmek istediğinize emin misiniz?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Evet, Sil</button>
+    <a href="{% url 'user_list' %}">Vazgeç</a>
+</form>
