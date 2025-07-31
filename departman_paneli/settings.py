@@ -7,7 +7,11 @@ SECRET_KEY = 'django-insecure-...'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'web-production-7cbc.up.railway.app',
+    'localhost',
+    '127.0.0.1'
+]
 
 INSTALLED_APPS = [
     'departmanlar',
