@@ -77,6 +77,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'tr-tr'
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-7cbc.up.railway.app'
+]
+
 TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
