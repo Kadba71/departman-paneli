@@ -4,6 +4,7 @@ from .models import DataRecord, ManagerBonus
 from .forms import DataRecordForm, ManagerBonusForm
 from django.http import HttpResponse
 from openpyxl import Workbook
+from django.contrib.auth.decorators import login_required
 
 BONUS_DEPARTMENTS = [
     ('Dış Ekip-1 (Murat)', 'Dış Ekip-1 (Murat)'),
@@ -14,6 +15,7 @@ BONUS_DEPARTMENTS = [
     ('Retation Ekibi (Asuman)', 'Retation Ekibi (Asuman)'),
 ]
 
+@login_required(login_url='/login/')
 def dashboard(request):
     year = request.GET.get('year')
     month = request.GET.get('month')
