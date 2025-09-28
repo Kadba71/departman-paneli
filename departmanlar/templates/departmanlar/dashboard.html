@@ -69,6 +69,18 @@
 </head>
 <body>
 <div class="container-fluid">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #232323 !important; border-radius: 10px; margin-bottom: 20px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'dashboard' %}" style="color: #ffae42; font-weight: 700;">Departman Paneli</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link active" href="{% url 'dashboard' %}" style="color: #ffae42 !important; font-weight: 600;">Ana Sayfa</a>
+                <a class="nav-link" href="{% url 'bulk_message_panel' %}" style="color: #f4f6f8 !important; font-weight: 600;">Toplu Mesajlaşma</a>
+                <a class="nav-link" href="{% url 'logout' %}" style="color: #f4f6f8 !important; font-weight: 600;">Çıkış</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="row">
         <!-- Sol Menü -->
         <div class="col-md-3 sidebar">
