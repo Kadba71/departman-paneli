@@ -1,5 +1,5 @@
 from django import forms
-from .models import DataRecord, ManagerBonus
+from .models import DataRecord, ManagerBonus, Contact, BulkMessage
 
 class DataRecordForm(forms.ModelForm):
     class Meta:
@@ -63,3 +63,51 @@ class ManagerBonusForm(forms.ModelForm):
         except (ValueError, TypeError):
             raise forms.ValidationError("Veri sayısal olmalıdır (örn: 11.29 veya %11.29).")
         return value_float
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'phone_number', 'department', 'notes', 'is_active']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Kişinin adını giriniz'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+90 5XX XXX XX XX'}),
+            'department': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Departman (opsiyonel)'}),
+            'notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Notlar (opsiyonel)'}),
+            'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
+
+    def clean_phone_number(self):
+        phone = self.cleaned_data['phone_number']
+        # Telefon numarasının formatını kontrol et
+        phone = phone.replace(' ', '').replace('-', '').replace('(', '').replace(')', '')
+        if not phone.startswith('+'):
+            if phone.startswith('0'):
+                phone = '+90' + phone[1:]
+            elif not phone.startswith('90'):
+                phone = '+90' + phone
+            else:
+                phone = '+' + phone
+        return phone
+
+class BulkMessageForm(forms.ModelForm):
+    recipients = forms.ModelMultipleChoiceField(
+        queryset=Contact.objects.filter(is_active=True),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+        label="Alıcılar",
+        help_text="Mesaj gönderilecek kişileri seçin"
+    )
+
+    class Meta:
+        model = BulkMessage
+        fields = ['message_content', 'recipients']
+        widgets = {
+            'message_content': forms.Textarea(attrs={
+                'class': 'form-control', 
+                'rows': 5, 
+                'placeholder': 'Gönderilecek mesajı buraya yazın...',
+                'maxlength': 1000
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['message_content'].label = "Mesaj İçeriği"
